@@ -19,11 +19,10 @@ Cylon.robot()
     .on("ready", fly);
 
 function fly(robot) {
-    bot.drone.getPngStream()
-        .on("data", utils.sendFrame);
 
     bot = robot;
 
+    bot.drone.getPngStream().on("data", utils.sendFrame);
     bot.drone.config('general:navdata_demo', 'TRUE');
 
     bot.nav.on("navdata", function(data) {
@@ -76,7 +75,6 @@ function fly(robot) {
 
 function moveDrone(move){
 
-    console.log("Moving Right");
     if (move.left){
         console.log("Moving Left");
         bot.drone.left(0.2);
