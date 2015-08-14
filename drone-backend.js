@@ -44,26 +44,28 @@ function fly(robot) {
 
     bot.drone.takeoff();
 
-    after (5*1000, function() {
+    after (8*1000, function() {
         bot.drone.left (0.2)
     });
 
     after (10*1000, function(){
         bot.drone.left(0);
+        bot.drone.hover();
     });
 
-    after (2*1000, function() {
+    after (12*1000, function() {
         bot.drone.right (0.2);
     });
 
-    after (10*1000, function(){
+    after (14*1000, function(){
         bot.drone.right(0);
+        bot.drone.hover();
     });
 
-    after(5*1000, function() {
+    after(16*1000, function() {
         bot.drone.land();
     });
-    after(5*1000, function() {
+    after(20*1000, function() {
         bot.drone.stop();
     });
 }
