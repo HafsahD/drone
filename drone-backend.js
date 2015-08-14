@@ -29,7 +29,7 @@ function fly(robot) {
     bot.nav.on("altitudeChange", function(data) {
         console.log("Altitude:", data);
 
-        if (altitude > 2) {
+        if (data > 2) {
             bot.drone.land();
         }
     });
@@ -42,23 +42,28 @@ function fly(robot) {
 
     bot.drone.ftrim();
 
-
     bot.drone.takeoff();
 
-    bot.drone.left (0.2);
-    after (1*1000, function(){
+    after (5*1000, function() {
+        bot.drone.left (0.2)
+    });
+
+    after (10*1000, function(){
         bot.drone.left(0);
     });
 
-    bot.drone.right (0.2);
-    after (1*1000, function(){
+    after (2*1000, function() {
+        bot.drone.right (0.2);
+    });
+
+    after (10*1000, function(){
         bot.drone.right(0);
     });
 
-    after(8*1000, function() {
+    after(5*1000, function() {
         bot.drone.land();
     });
-    after(10*1000, function() {
+    after(5*1000, function() {
         bot.drone.stop();
     });
 }
