@@ -1,4 +1,6 @@
 var Cylon = require('cylon');
+var utils = require('./utils/droneUtils.js');
+var bot;
 
 // Initialise the robot
 Cylon.robot()
@@ -16,8 +18,10 @@ Cylon.robot()
     })
     .on("ready", fly);
 
-var bot;
 function fly(robot) {
+    bot.drone.getPngStream()
+        .on("data", utils.sendFrame);
+
     bot = robot;
 
     bot.drone.config('general:navdata_demo', 'TRUE');
@@ -66,6 +70,29 @@ function fly(robot) {
     after(5*1000, function() {
         bot.drone.stop();
     });
+}
+
+function moveDrone(move){
+
+    console.log("Moving Right");
+    if (move.left){
+        console.log("Moving Left");
+        bot.drone.left(0.2);
+        bot.drone.forward(0);
+        after(0.5 * 1000,function(){
+            bot.drone.left(0);
+            bot.drone.forward(0.05);
+            });
+}
+    if(move.right) {
+        console.log("Moving Right");
+        bot.drone.right(0.2);
+        bot.drone.forward(0);
+        after(0.5 * 1000, function () {
+            bot.drone.right(0);
+            bot.drone.forward(0.05);
+        });
+    }
 }
 
 Cylon.start();
